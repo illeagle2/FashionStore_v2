@@ -21,7 +21,10 @@ import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -45,11 +48,12 @@ import com.cyberwalker.fashionstore.ui.theme.small_caption
 @Composable
 fun SplashScreen(
     viewModel: SplashViewModel = hiltViewModel(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
+    //scaffoldState: ScaffoldState = rememberScaffoldState(),
     onAction: (actions: SplashScreenActions) -> Unit
-) {
+)
+{
     Scaffold(
-        scaffoldState = scaffoldState
+        //scaffoldState = scaffoldState
     ) { innerPadding ->
         SplashScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
     }
@@ -61,6 +65,7 @@ private fun SplashScreenContent(modifier: Modifier, onAction: (actions: SplashSc
         modifier = modifier
             .padding(40.dp)
             .fillMaxHeight()
+            .verticalScroll(rememberScrollState())
             .semantics { contentDescription = "Splash Screen" }
     ) {
         val activity = (LocalContext.current as? Activity)
@@ -78,7 +83,7 @@ private fun SplashScreenContent(modifier: Modifier, onAction: (actions: SplashSc
         Text(text = "Welcome to our store", style = MaterialTheme.typography.small_caption)
         Image(
             modifier = Modifier
-                .defaultMinSize(minWidth = 293.dp, minHeight = 387.dp)
+                .defaultMinSize(minWidth = 293.dp, minHeight = 320.dp)
                 .align(Alignment.CenterHorizontally),
             painter = painterResource(id = R.drawable.ic_splash),
             contentDescription = null
@@ -91,8 +96,9 @@ private fun SplashScreenContent(modifier: Modifier, onAction: (actions: SplashSc
         )
         Image(
             modifier = Modifier
-                .weight(1F)
-                .align(Alignment.CenterHorizontally).clickable {
+                .align(Alignment.CenterHorizontally)
+                .defaultMinSize()
+                .clickable {
                     //checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 101,  activity!!)
                     onAction(SplashScreenActions.LoadHome)
                 },

@@ -48,6 +48,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.cyberwalker.fashionstore.utils.showMessage
 
 @Composable
@@ -257,11 +258,11 @@ private fun ImageBox(
 //        )
 
         AsyncImage(
-            model = selectedColor?._image,
-//            ImageRequest.Builder(LocalContext.current)
-//                .data(student.image)
-//                .crossfade(true)
-//                .build(),//
+            model =// selectedColor?._image,
+            ImageRequest.Builder(LocalContext.current)
+                .data(selectedColor._image)
+                .crossfade(true)
+                .build(),//
             contentDescription = selectedColor._colorTitle,
             //contentScale = ContentScale.Crop,
             placeholder = painterResource(R.drawable.ic_girl),

@@ -60,8 +60,6 @@ fun HomeScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
-            // Drawer content
-            //CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl )
             Drawer(modifier = Modifier) {}
         }
         ,
@@ -143,9 +141,11 @@ private fun HomeScreenContent(
                     .size(50.dp)
                     .clickable {
                         //showMessage(context, "Drawer cliqued")
+
                         scope.launch {
                             drawerState.apply {
-                                if (isClosed) open() else close()
+                                drawerState.open()
+                                //if (isClosed) open() else close()
                             }
                         }
                     }
