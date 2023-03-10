@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "870476917512",
+    "project_id": "fir-login-app-c79bc",
+    "storage_bucket": "fir-login-app-c79bc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870476917512:android:c51194590eac0842b49abd",
+        "android_client_info": {
+          "package_name": "com.cyberwalker.fashionstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870476917512-f8p804upao4te9aqu8bn4n0v2qdv9avs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwKjHwygikQ48UmW8_Aq3ycagC_1PmXRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870476917512-bfnpqskhp6fuok7rmqbs2e90vd092r51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870476917512:android:7c2a7adb244e4f82b49abd",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870476917512-ebto7hf6n8ntr58e27kpdfdu2puq6f0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "a25710d8f1f16d3dcc10cd19573b184e8157990d"
+          }
+        },
+        {
+          "client_id": "870476917512-f8p804upao4te9aqu8bn4n0v2qdv9avs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwKjHwygikQ48UmW8_Aq3ycagC_1PmXRU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870476917512-bfnpqskhp6fuok7rmqbs2e90vd092r51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
