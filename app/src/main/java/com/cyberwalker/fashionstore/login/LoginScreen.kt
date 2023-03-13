@@ -96,7 +96,7 @@ fun LoginScreenContent(
             onLoginClick = {
                 //throw RuntimeException("Test Crash")
                    scope.launch{
-                       viewModel.loginUser(email, password)
+                       viewModel.loginUser(email.trim(), password.trim())
                        //moved this action to the success launch effect
                        //onAction(SplashScreenActions.LoadHome)
                    }
