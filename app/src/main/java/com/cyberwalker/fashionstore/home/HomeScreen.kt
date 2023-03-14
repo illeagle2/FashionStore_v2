@@ -33,10 +33,14 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigation
+import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImagePainter.State.Empty.painter
 import com.cyberwalker.fashionstore.R
 import com.cyberwalker.fashionstore.dump.BottomNav
 import com.cyberwalker.fashionstore.dump.vertical
+import com.cyberwalker.fashionstore.navigation.DrawerNavigation
+import com.cyberwalker.fashionstore.navigation.FashionNavGraph
 import com.cyberwalker.fashionstore.ui.theme.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -48,9 +52,10 @@ fun HomeScreen(
     onAction: (actions: HomeScreenActions) -> Unit,
     navController: NavHostController
 ) {
-    val scaffoldState = rememberScaffoldState()
+    val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
-
+    val navController = rememberNavController()
+//    val navControllerD = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val openDrawer = {
         scope.launch {
@@ -60,36 +65,27 @@ fun HomeScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
-            Drawer(modifier = Modifier) {}
-        }
-        ,
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                modifier = Modifier
-                    .padding(all = 16.dp),
-//                    .align(alignment = Alignment.BottomEnd),
-                text = { Text("Open or close drawer") },
-                onClick = {
-                    scope.launch {
-                        scaffoldState.drawerState.apply {
-                            if (isClosed) open() else close()
-                        }
-                    }
-                }
+            Drawer(
+                scope = scope,
+                modifier = Modifier,
+                scaffoldState = scaffoldState,
+                navController = navController
             )
-        }
-        ,
+        },
+        topBar = { TopBar(viewModel = viewModel, drawerState =  drawerState, scaffoldState=scaffoldState)},
         bottomBar = {
             BottomNav(navController = navController)
         }
     ) { innerPadding ->
         HomeScreenContent(
-            viewModel=viewModel,
+            viewModel = viewModel,
             modifier = Modifier.padding(innerPadding),
             onAction = onAction,
-            drawerState = drawerState
+//            drawerState = drawerState
 
         )
+//      BottomNav(navController = navController)
+        DrawerNavigation(navController = navController)
     }
 }
 
@@ -98,62 +94,16 @@ private fun HomeScreenContent(
     modifier: Modifier,
     viewModel: HomeViewModel,
     onAction: (actions: HomeScreenActions) -> Unit,
-    drawerState: DrawerState
+//    drawerState: DrawerState
 ) {
-    val loggedInUser = viewModel.user
-    val scope = rememberCoroutineScope()
+//    val loggedInUser = viewModel.user
+//    val scope = rememberCoroutineScope()
     Column(
         modifier = modifier
             .fillMaxHeight()
             .verticalScroll(rememberScrollState())
             .semantics { contentDescription = "Home Screen" }
     ) {
-        Row(
-            modifier = Modifier
-                .padding(32.dp)
-                .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
-        ) {
-            val context = LocalContext.current
-            Box(
-                modifier = Modifier.size(width = 37.dp, height = 40.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Spacer(
-                    modifier = Modifier
-                        .size(width = 37.dp, height = 40.dp)
-                        .background(color = ltgray, shape = RoundedCornerShape(12.dp))
-                )
-                Image(
-                    modifier = Modifier
-                        .size(width = 32.dp, height = 32.dp),
-                    painter = painterResource(id = R.drawable.ic_man),
-                    contentDescription = null
-                )
-            }
-            Spacer(modifier = Modifier.size(24.dp))
-            Column {
-                Text(text = "Welcome", style = MaterialTheme.typography.small_caption)
-                Text(text = "Hi ${loggedInUser?.email ?: "default"}", style = MaterialTheme.typography.medium_14)
-            }
-            Spacer(modifier = Modifier.weight(1F))
-            Image(
-                modifier = Modifier
-                    .size(50.dp)
-                    .clickable {
-                        //showMessage(context, "Drawer cliqued")
-
-                        scope.launch {
-                            drawerState.apply {
-                                drawerState.open()
-                                //if (isClosed) open() else close()
-                            }
-                        }
-                    }
-                    .padding(12.dp),
-                painter = painterResource(id = R.drawable.menu_bar),
-                contentDescription = null
-            )
-        }
 
         Row(
             modifier = Modifier
@@ -263,7 +213,7 @@ private fun TabRow() {
 }
 
 @Composable
-private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit,) {
+private fun GridOfImages(onAction: (actions: HomeScreenActions) -> Unit) {
     Row(modifier = Modifier.fillMaxWidth()) {
         Column {
             Box(
