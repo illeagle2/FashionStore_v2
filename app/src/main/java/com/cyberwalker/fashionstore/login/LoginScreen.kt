@@ -1,6 +1,5 @@
 package com.cyberwalker.fashionstore.login
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -22,24 +21,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.createSavedStateHandle
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
 import com.cyberwalker.fashionstore.R
-import com.cyberwalker.fashionstore.home.HomeScreen
 import com.cyberwalker.fashionstore.splash.SplashScreenActions
-import com.cyberwalker.fashionstore.splash.SplashViewModel
 import com.cyberwalker.fashionstore.utils.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import kotlinx.coroutines.launch
-import javax.inject.Inject
-import kotlin.coroutines.coroutineContext
 
 
 @Composable
