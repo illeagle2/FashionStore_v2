@@ -48,20 +48,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     onAction: (actions: HomeScreenActions) -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    navControllerD: NavHostController
 ) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
-    val navController = rememberNavController()
-//    val navControllerD = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val openDrawer = {
-        scope.launch {
-            drawerState.open()
-        }
-    }
+
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
@@ -81,11 +75,8 @@ fun HomeScreen(
             viewModel = viewModel,
             modifier = Modifier.padding(innerPadding),
             onAction = onAction,
-//            drawerState = drawerState
-
         )
-//      BottomNav(navController = navController)
-        DrawerNavigation(navController = navController)
+//        DrawerNavigation(navController = navControllerD)
     }
 }
 
@@ -94,10 +85,7 @@ private fun HomeScreenContent(
     modifier: Modifier,
     viewModel: HomeViewModel,
     onAction: (actions: HomeScreenActions) -> Unit,
-//    drawerState: DrawerState
 ) {
-//    val loggedInUser = viewModel.user
-//    val scope = rememberCoroutineScope()
     Column(
         modifier = modifier
             .fillMaxHeight()

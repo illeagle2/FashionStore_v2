@@ -53,6 +53,7 @@ sealed class Screen(val name: String, val route: String) {
 fun FashionNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberAnimatedNavController(),
+    navControllerD: NavHostController = rememberAnimatedNavController(),
     actions: NavActions = remember(navController) {
         NavActions(navController)
     }
@@ -73,7 +74,7 @@ fun FashionNavGraph(
         }
 
         animatedComposable(Screen.Home.route) {
-            HomeScreen(onAction = actions::navigateFromHome,navController = navController)
+            HomeScreen(onAction = actions::navigateFromHome,navController = navController,navControllerD = navControllerD )
         }
 
         animatedComposable(Screen.Detail.route) {
