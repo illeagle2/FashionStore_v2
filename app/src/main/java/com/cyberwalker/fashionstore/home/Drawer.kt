@@ -47,7 +47,6 @@ fun Drawer(
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
-//    onDestinationClicked: (route: String) -> Unit
 ) {
     val activity = LocalContext.current as Activity
     Column(
@@ -88,19 +87,10 @@ fun Drawer(
                         viewModel.logOutUser()
                         activity.finish()
                     }
-
                     scope.launch { scaffoldState.drawerState.close() }
-//                    onDestinationClicked(screen.route)
                 }
             )
         }
     }
 }
 
-//@Preview
-//@Composable
-//fun DrawerPreview() {
-////    FashionStoreTheme {
-//    Drawer() {}
-////    }
-//}
