@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.cyberwalker.fashionstore.R
-import com.cyberwalker.fashionstore.splash.SplashScreenActions
 import com.cyberwalker.fashionstore.utils.Constants
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -36,20 +35,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
-    onAction: (actions: SplashScreenActions) -> Unit
-) {
-    Scaffold(
-        scaffoldState = scaffoldState
-    ) { innerPadding ->
-        LoginScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
-    }
-}
-@Composable
-fun LoginScreenContent(
-    modifier: Modifier,
-    onAction: (actions: SplashScreenActions) -> Unit,
-    viewModel: LoginViewModel = hiltViewModel(),
+    onLoginClick: () -> Unit
 ) {
 
     var email by remember { mutableStateOf("") }
@@ -89,7 +75,6 @@ fun LoginScreenContent(
                    scope.launch{
                        viewModel.loginUser(email.trim(), password.trim())
                        //moved this action to the success launch effect
-                       //onAction(SplashScreenActions.LoadHome)
                    }
                 },
             onEmailChange = { email = it},
@@ -136,7 +121,7 @@ fun LoginScreenContent(
                     if (state.value?.isSuccess?.isNotBlank() == true){
                         val success = state.value?.isSuccess
                         Toast.makeText(context, "${success}", Toast.LENGTH_LONG).show()
-                        onAction(SplashScreenActions.LoadHome)
+                        onLoginClick()
 
                     }
                 }
@@ -153,7 +138,7 @@ fun LoginScreenContent(
                 scope.launch {
                     if (googleSignInState.success != null) {
                         Toast.makeText(context, "Google Sign-in Success", Toast.LENGTH_LONG).show()
-                        onAction(SplashScreenActions.LoadHome)
+                        onLoginClick()
                     }
                 }
             }

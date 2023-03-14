@@ -45,30 +45,17 @@ import com.cyberwalker.fashionstore.ui.theme.dark
 import com.cyberwalker.fashionstore.ui.theme.large
 import com.cyberwalker.fashionstore.ui.theme.small_caption
 
-@Composable
-fun SplashScreen(
-    viewModel: SplashViewModel = hiltViewModel(),
-    //scaffoldState: ScaffoldState = rememberScaffoldState(),
-    onAction: (actions: SplashScreenActions) -> Unit
-)
-{
-    Scaffold(
-        //scaffoldState = scaffoldState
-    ) { innerPadding ->
-        SplashScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
-    }
-}
 
 @Composable
-private fun SplashScreenContent(modifier: Modifier, onAction: (actions: SplashScreenActions) -> Unit) {
+fun SplashScreen(
+    onClick: () -> Unit) {
     Column(
-        modifier = modifier
+        modifier = Modifier
             .padding(40.dp)
             .fillMaxHeight()
             .verticalScroll(rememberScrollState())
             .semantics { contentDescription = "Splash Screen" }
     ) {
-        val activity = (LocalContext.current as? Activity)
         Text(
             text = "Find and shop your fashion products here.",
             style = MaterialTheme.typography.large.copy(
@@ -100,7 +87,7 @@ private fun SplashScreenContent(modifier: Modifier, onAction: (actions: SplashSc
                 .defaultMinSize()
                 .clickable {
                     //checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 101,  activity!!)
-                    onAction(SplashScreenActions.LoadHome)
+                    onClick()
                 },
             painter = painterResource(id = R.drawable.splash_cta),
             contentDescription = null

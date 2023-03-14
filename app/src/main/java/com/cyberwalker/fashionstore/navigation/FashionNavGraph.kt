@@ -53,11 +53,7 @@ sealed class Screen(val name: String, val route: String) {
 fun FashionNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberAnimatedNavController(),
-    navControllerD: NavHostController = rememberAnimatedNavController(),
-    actions: NavActions = remember(navController) {
-        NavActions(navController)
-    }
-) {
+    ) {
     AnimatedNavHost(
         navController = navController,
         route = Graph.ROOT,
@@ -65,65 +61,21 @@ fun FashionNavGraph(
         modifier = modifier
     ) {
         animatedComposable(Screen.Splash.route) {
-            SplashScreen(onAction = actions::navigateToLogin)
-            //SplashScreen(onAction = actions::navigateToHome)
+            SplashScreen(onClick = {
+                navController.popBackStack()
+                navController.navigate(Screen.Login.route)
+            })
         }
 
         animatedComposable(Screen.Login.route){
-            LoginScreen(onAction = actions::navigateToHome)
-            //(onAction = actions::navigateToHome)
+            LoginScreen(onLoginClick = {
+                navController.popBackStack()
+                navController.navigate(Graph.HOME)
+            })
         }
 
-        animatedComposable(Screen.Home.route) {
-            HomeScreen(onAction = actions::navigateFromHome,navController = navController,navControllerD = navControllerD )
-        }
-
-        animatedComposable(Screen.Detail.route) {
-            DetailScreen(onAction = actions::navigateFromDetails)
-        }
-
-        animatedComposable(Screen.Search.route){
-            SearchScreen(onAction = actions::navigateFromHome, navController = navController)
-        }
-
-        animatedComposable(Screen.Liked.route){
-            LikedScreen(onAction = actions::navigateFromHome, navController = navController)
-        }
-
-        animatedComposable(Screen.Profile.route){
-            ProfileScreen(onAction = actions::navigateFromHome, navController = navController)
-        }
-    }
-}
-
-class NavActions(private val navController: NavController) {
-    fun navigateToHome(_A: SplashScreenActions) {
-        navController.navigate(Screen.Home.name) {
-            popUpTo(Screen.Splash.route){
-                inclusive = true
-            }
-        }
-    }
-
-    fun navigateToLogin(_A: SplashScreenActions){
-        navController.navigate(Screen.Login.name){
-            popUpTo(Screen.Splash.route){
-                inclusive = true
-            }
-        }
-    }
-
-    fun navigateFromHome(actions: HomeScreenActions) {
-        when (actions) {
-            HomeScreenActions.Details -> {
-                navController.navigate(Screen.Detail.name)
-            }
-        }
-    }
-
-    fun navigateFromDetails(actions: DetailScreenActions) {
-        when(actions) {
-            DetailScreenActions.Back -> navController.popBackStack()
+        animatedComposable(route = Graph.HOME){
+            HomeScreen()
         }
     }
 }
