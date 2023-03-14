@@ -60,6 +60,7 @@ fun FashionNavGraph(
 ) {
     AnimatedNavHost(
         navController = navController,
+        route = Graph.ROOT,
         startDestination = Screen.Splash.route,
         modifier = modifier
     ) {
@@ -125,4 +126,13 @@ class NavActions(private val navController: NavController) {
             DetailScreenActions.Back -> navController.popBackStack()
         }
     }
+}
+
+object Graph {
+    const val ROOT = "root_graph"//
+    const val DETAILS = "details_graph"
+    const val SPLASH ="splash"
+    const val LOGIN = "login"
+    const val HOME = "home_graph"
+//    const val AUTHENTICATION = "auth_graph"
 }

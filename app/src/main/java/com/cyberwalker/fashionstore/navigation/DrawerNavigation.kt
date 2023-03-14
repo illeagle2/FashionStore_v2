@@ -20,7 +20,7 @@ fun DrawerNavigation(navController: NavHostController){
         }
 
         composable(DrawerScreens.Profile.route){
-            ProfileScreenContent(modifier = Modifier){}
+            ProfileScreenContent(modifier = Modifier)//{}
         }
     }
 }

@@ -32,7 +32,9 @@ import com.cyberwalker.fashionstore.ui.theme.bottomNavbg
 import com.cyberwalker.fashionstore.ui.theme.highlight
 
 @Composable
-fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkTheme()) {
+fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkTheme(),
+//onItemClicked: (BottomNavItem)-> Unit
+) {
     val items = listOf(
         BottomNavItem.Home,
         BottomNavItem.Search,
@@ -54,6 +56,7 @@ fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkThem
                 selected = currentRoute == item.screen_route,
                 onClick = {
                     navController.navigate(item.screen_route)
+//                    onItemClicked(item)
                 }
             )
         }
