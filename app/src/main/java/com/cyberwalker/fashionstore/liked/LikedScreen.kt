@@ -22,15 +22,15 @@ fun LikedScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = {
-            BottomNav(navController = navController)
+            BottomNav(navController = navController)//, onItemClicked = { navController.navigate(it.screen_route) } )
         }
     ) { innerPadding ->
-        LikedScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
+        LikedScreenContent(modifier = Modifier.padding(innerPadding))//, onAction = onAction)
     }
 }
 
 @Composable
-fun LikedScreenContent(modifier: Modifier, onAction: (actions: HomeScreenActions) -> Unit) {
+fun LikedScreenContent(modifier: Modifier){//}, onAction: (actions: HomeScreenActions) -> Unit) {
 
     Text(text = "Liked Screen")
 }

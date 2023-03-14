@@ -53,12 +53,14 @@ sealed class Screen(val name: String, val route: String) {
 fun FashionNavGraph(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberAnimatedNavController(),
+    navControllerD: NavHostController = rememberAnimatedNavController(),
     actions: NavActions = remember(navController) {
         NavActions(navController)
     }
 ) {
     AnimatedNavHost(
         navController = navController,
+        route = Graph.ROOT,
         startDestination = Screen.Splash.route,
         modifier = modifier
     ) {
@@ -73,7 +75,7 @@ fun FashionNavGraph(
         }
 
         animatedComposable(Screen.Home.route) {
-            HomeScreen(onAction = actions::navigateFromHome,navController = navController)
+            HomeScreen(onAction = actions::navigateFromHome,navController = navController,navControllerD = navControllerD )
         }
 
         animatedComposable(Screen.Detail.route) {
@@ -124,4 +126,13 @@ class NavActions(private val navController: NavController) {
             DetailScreenActions.Back -> navController.popBackStack()
         }
     }
+}
+
+object Graph {
+    const val ROOT = "root_graph"//
+    const val DETAILS = "details_graph"
+    const val SPLASH ="splash"
+    const val LOGIN = "login"
+    const val HOME = "home_graph"
+//    const val AUTHENTICATION = "auth_graph"
 }

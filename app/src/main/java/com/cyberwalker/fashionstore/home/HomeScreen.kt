@@ -41,27 +41,24 @@ import com.cyberwalker.fashionstore.dump.BottomNav
 import com.cyberwalker.fashionstore.dump.vertical
 import com.cyberwalker.fashionstore.navigation.DrawerNavigation
 import com.cyberwalker.fashionstore.navigation.FashionNavGraph
+import com.cyberwalker.fashionstore.navigation.HomeNavGraph
+import com.cyberwalker.fashionstore.navigation.NavActions
 import com.cyberwalker.fashionstore.ui.theme.*
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     onAction: (actions: HomeScreenActions) -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    navControllerD: NavHostController
 ) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
-    val navController = rememberNavController()
-//    val navControllerD = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
-    val openDrawer = {
-        scope.launch {
-            drawerState.open()
-        }
-    }
+
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
@@ -72,32 +69,35 @@ fun HomeScreen(
                 navController = navController
             )
         },
-        topBar = { TopBar(viewModel = viewModel, drawerState =  drawerState, scaffoldState=scaffoldState)},
+        topBar = {
+            TopBar(
+                viewModel = viewModel,
+                drawerState = drawerState,
+                scaffoldState = scaffoldState
+            )
+        },
         bottomBar = {
-            BottomNav(navController = navController)
+            BottomNav(
+                navController = navController
+            )//,
+//                onItemClicked = { navController.navigate(it.screen_route) })
         }
     ) { innerPadding ->
-        HomeScreenContent(
-            viewModel = viewModel,
-            modifier = Modifier.padding(innerPadding),
-            onAction = onAction,
-//            drawerState = drawerState
-
-        )
-//      BottomNav(navController = navController)
-        DrawerNavigation(navController = navController)
+        HomeNavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
+//        HomeScreenContent(
+//            viewModel = viewModel,
+//            modifier = Modifier.padding(innerPadding),
+//            onAction = onAction,
+//        )
     }
 }
 
 @Composable
-private fun HomeScreenContent(
+fun HomeScreenContent(
     modifier: Modifier,
     viewModel: HomeViewModel,
     onAction: (actions: HomeScreenActions) -> Unit,
-//    drawerState: DrawerState
 ) {
-//    val loggedInUser = viewModel.user
-//    val scope = rememberCoroutineScope()
     Column(
         modifier = modifier
             .fillMaxHeight()

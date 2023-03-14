@@ -23,15 +23,15 @@ fun SearchScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = {
-            BottomNav(navController = navController)
+            BottomNav(navController = navController)//, onItemClicked = { navController.navigate(it.screen_route) })
         }
     ) { innerPadding ->
-        SearchScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
+        SearchScreenContent(modifier = Modifier.padding(innerPadding))//, onAction = onAction)
     }
 }
 
 @Composable
-fun SearchScreenContent(modifier: Modifier, onAction: (actions: HomeScreenActions) -> Unit) {
+fun SearchScreenContent(modifier: Modifier){//}, onAction: (actions: HomeScreenActions) -> Unit) {
 
     Text(text = "Search Screen")
 }

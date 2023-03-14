@@ -22,15 +22,15 @@ fun ProfileScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         bottomBar = {
-            BottomNav(navController = navController)
+            BottomNav(navController = navController)//, onItemClicked = { navController.navigate(it.screen_route) })
         }
     ) { innerPadding ->
-        ProfileScreenContent(modifier = Modifier.padding(innerPadding), onAction = onAction)
+        ProfileScreenContent(modifier = Modifier.padding(innerPadding))//, onAction = onAction)
     }
 }
 
 @Composable
-fun ProfileScreenContent(modifier: Modifier, onAction: (actions: HomeScreenActions) -> Unit) {
+fun ProfileScreenContent(modifier: Modifier){//, onAction: (actions: HomeScreenActions) -> Unit) {
 
     Text(text = "Profile Screen")
 }
