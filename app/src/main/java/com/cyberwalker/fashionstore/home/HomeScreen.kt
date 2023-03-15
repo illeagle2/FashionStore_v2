@@ -26,10 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -62,13 +65,16 @@ fun HomeScreen(
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
-            Drawer(
+         CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl ) {
+          Drawer(
                 scope = scope,
                 modifier = Modifier,
                 scaffoldState = scaffoldState,
-                navController = navController
+                navController = navController,
+
             )
-        },
+        }},
+
         topBar = {
             TopBar(
                 viewModel = viewModel,
@@ -83,12 +89,12 @@ fun HomeScreen(
 //                onItemClicked = { navController.navigate(it.screen_route) })
         }
     ) { innerPadding ->
-        HomeNavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
-//        HomeScreenContent(
-//            viewModel = viewModel,
-//            modifier = Modifier.padding(innerPadding),
-//            onAction = onAction,
-//        )
+//        HomeNavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
+        HomeScreenContent(
+            viewModel = viewModel,
+            modifier = Modifier.padding(innerPadding),
+            onAction = onAction,
+        )
     }
 }
 
