@@ -45,7 +45,6 @@ import com.cyberwalker.fashionstore.dump.vertical
 import com.cyberwalker.fashionstore.navigation.DrawerNavigation
 import com.cyberwalker.fashionstore.navigation.FashionNavGraph
 import com.cyberwalker.fashionstore.navigation.HomeNavGraph
-import com.cyberwalker.fashionstore.navigation.NavActions
 import com.cyberwalker.fashionstore.ui.theme.*
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.coroutineScope
@@ -54,9 +53,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onAction: (actions: HomeScreenActions) -> Unit,
-    navController: NavHostController,
-    navControllerD: NavHostController
+    navController: NavHostController = rememberNavController(),
 ) {
     val scaffoldState = rememberScaffoldState(rememberDrawerState(DrawerValue.Closed))
     val scope = rememberCoroutineScope()
@@ -85,16 +82,15 @@ fun HomeScreen(
         bottomBar = {
             BottomNav(
                 navController = navController
-            )//,
-//                onItemClicked = { navController.navigate(it.screen_route) })
+            )
         }
     ) { innerPadding ->
-//        HomeNavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
-        HomeScreenContent(
-            viewModel = viewModel,
-            modifier = Modifier.padding(innerPadding),
-            onAction = onAction,
-        )
+        HomeNavGraph(navController = navController, modifier = Modifier.padding(innerPadding))
+//        HomeScreenContent(
+//            viewModel = viewModel,
+//            modifier = Modifier.padding(innerPadding),
+//            onAction = onAction,
+//        )
     }
 }
 

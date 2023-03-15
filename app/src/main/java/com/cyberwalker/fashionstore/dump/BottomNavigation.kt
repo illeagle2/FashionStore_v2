@@ -25,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cyberwalker.fashionstore.R
 import com.cyberwalker.fashionstore.navigation.Screen
@@ -55,8 +56,10 @@ fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkThem
                 alwaysShowLabel = false,
                 selected = currentRoute == item.screen_route,
                 onClick = {
-                    navController.navigate(item.screen_route)
-//                    onItemClicked(item)
+                    navController.navigate(item.screen_route){
+                        popUpTo(navController.graph.findStartDestination().id)
+                        launchSingleTop = true
+                    }
                 }
             )
         }
