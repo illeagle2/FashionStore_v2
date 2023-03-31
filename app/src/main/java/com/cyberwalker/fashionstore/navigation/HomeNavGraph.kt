@@ -9,7 +9,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.cyberwalker.fashionstore.detail.DetailScreen
-import com.cyberwalker.fashionstore.dump.BottomNavItem
 import com.cyberwalker.fashionstore.home.HomeScreenContent
 import com.cyberwalker.fashionstore.liked.LikedScreenContent
 import com.cyberwalker.fashionstore.profile.ProfileScreenContent

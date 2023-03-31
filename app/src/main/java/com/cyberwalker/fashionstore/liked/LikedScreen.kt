@@ -8,9 +8,8 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.cyberwalker.fashionstore.dump.BottomNav
 import com.cyberwalker.fashionstore.home.HomeScreenActions
-import com.cyberwalker.fashionstore.search.SearchScreenContent
+import com.cyberwalker.fashionstore.navigation.BottomNav
 
 @Composable
 fun LikedScreen(

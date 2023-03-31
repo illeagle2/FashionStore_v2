@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cyberwalker.fashionstore.dump
+package com.cyberwalker.fashionstore.navigation
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.BottomNavigation
@@ -28,7 +28,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cyberwalker.fashionstore.R
-import com.cyberwalker.fashionstore.navigation.Screen
 import com.cyberwalker.fashionstore.ui.theme.bottomNavbg
 import com.cyberwalker.fashionstore.ui.theme.highlight
 

@@ -8,23 +8,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImagePainter.State.Empty.painter
 import com.cyberwalker.fashionstore.R
 import com.cyberwalker.fashionstore.ui.theme.ltgray
 import com.cyberwalker.fashionstore.ui.theme.medium_14
 import com.cyberwalker.fashionstore.ui.theme.small_caption
-import com.cyberwalker.fashionstore.utils.showMessage
 import kotlinx.coroutines.launch
 
 
