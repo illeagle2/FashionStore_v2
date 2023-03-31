@@ -46,7 +46,8 @@ fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkThem
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    val bottomBarDestination = items.any {it.screen_route == currentRoute}
+    val bottomBarDestination = items.any {
+        it.screen_route == currentRoute}
     if (bottomBarDestination){
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.bottomNavbg,

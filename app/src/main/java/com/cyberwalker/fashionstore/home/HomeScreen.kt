@@ -15,6 +15,7 @@
  */
 package com.cyberwalker.fashionstore.home
 
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -37,19 +38,20 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.Navigation
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImagePainter.State.Empty.painter
 import com.cyberwalker.fashionstore.R
+import com.cyberwalker.fashionstore.detail.DetailScreen
 import com.cyberwalker.fashionstore.dump.BottomNav
 import com.cyberwalker.fashionstore.dump.vertical
-import com.cyberwalker.fashionstore.navigation.DrawerNavigation
-import com.cyberwalker.fashionstore.navigation.FashionNavGraph
-import com.cyberwalker.fashionstore.navigation.HomeNavGraph
+import com.cyberwalker.fashionstore.navigation.*
 import com.cyberwalker.fashionstore.ui.theme.*
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
+private const val TAG = "HomeScreen"
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
@@ -73,12 +75,16 @@ fun HomeScreen(
         }},
 
         topBar = {
+            val navBackStackEntry by navController.currentBackStackEntryAsState()
+            val currentRoute = navBackStackEntry?.destination?.route
+
+            if (DetailsScreen.Detail.route!=currentRoute){
             TopBar(
                 viewModel = viewModel,
                 drawerState = drawerState,
                 scaffoldState = scaffoldState
             )
-        },
+        }},
         bottomBar = {
             BottomNav(
                 navController = navController

@@ -1,5 +1,6 @@
 package com.cyberwalker.fashionstore.home
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -27,6 +28,7 @@ import com.cyberwalker.fashionstore.utils.showMessage
 import kotlinx.coroutines.launch
 
 
+@SuppressLint("SuspiciousIndentation")
 @Composable
 fun TopBar(
     viewModel: HomeViewModel,
@@ -37,8 +39,9 @@ fun TopBar(
 //    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         val loggedInUser = viewModel.user
         val scope = rememberCoroutineScope()
-        val context = LocalContext.current
-//        ModalDrawer(
+//        val context = LocalContext.current
+//        ModalDrawe
+//        r(
 //            drawerState = drawerState,
 //            drawerContent = {
                 Row(

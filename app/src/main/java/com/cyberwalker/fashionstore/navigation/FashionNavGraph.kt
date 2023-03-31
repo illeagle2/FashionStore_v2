@@ -41,7 +41,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 sealed class Screen(val name: String, val route: String) {
     object Splash : Screen("splash", "splash")
     object Home : Screen("home", "home")
-    object Detail : Screen("detail", "detail")
+//    object Detail : Screen("detail", "detail")
     object Login: Screen("login", "login")
     object Search: Screen("search", "search")
     object Liked: Screen("liked", "liked")
