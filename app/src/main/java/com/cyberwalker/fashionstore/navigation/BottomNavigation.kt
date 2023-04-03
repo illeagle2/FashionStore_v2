@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cyberwalker.fashionstore.dump
+package com.cyberwalker.fashionstore.navigation
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.BottomNavigation
@@ -28,7 +28,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.cyberwalker.fashionstore.R
-import com.cyberwalker.fashionstore.navigation.Screen
 import com.cyberwalker.fashionstore.ui.theme.bottomNavbg
 import com.cyberwalker.fashionstore.ui.theme.highlight
 
@@ -42,12 +41,17 @@ fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkThem
         BottomNavItem.Liked,
         BottomNavItem.Profile,
     )
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    val bottomBarDestination = items.any {
+        it.screen_route == currentRoute}
+    if (bottomBarDestination){
     BottomNavigation(
         backgroundColor = MaterialTheme.colors.bottomNavbg,
         contentColor = highlight
     ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
                 icon = { Icon(painterResource(id = item.icon), contentDescription = item.title) },
@@ -63,7 +67,7 @@ fun BottomNav(navController: NavController, isDark: Boolean = isSystemInDarkThem
                 }
             )
         }
-    }
+    }}
 }
 
 sealed class BottomNavItem(var title: String, var icon: Int, var screen_route: String) {
