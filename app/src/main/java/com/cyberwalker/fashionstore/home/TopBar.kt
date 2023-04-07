@@ -8,10 +8,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.cyberwalker.fashionstore.R
 import com.cyberwalker.fashionstore.ui.theme.ltgray
@@ -28,14 +32,16 @@ fun TopBar(
     scaffoldState: ScaffoldState,
 
     ) {
-//    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
+    CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Rtl) {
         val loggedInUser = viewModel.user
         val scope = rememberCoroutineScope()
-//        val context = LocalContext.current
-//        ModalDrawe
-//        r(
-//            drawerState = drawerState,
-//            drawerContent = {
+        val context = LocalContext.current
+        ModalDrawer(
+            drawerState = drawerState,
+            drawerContent = {
+                Text(text = "right to left")
+            },
+            content = {
                 Row(
                     modifier = Modifier
                         .padding(32.dp)
@@ -72,28 +78,25 @@ fun TopBar(
                             .size(50.dp)
                             .clickable {
 //                    showMessage(context, "Drawer cliqued")
-                                scope.launch { scaffoldState.drawerState.open() }
+                                scope.launch { drawerState.open() }
                             }
                             .padding(12.dp),
                         painter = painterResource(id = R.drawable.menu_bar),
                         contentDescription = null
                     )
                 }
-//            },
-//            content = {
-//                Column {
-//                    Text("Text in Bodycontext")
-//                    Button(onClick = {
-//
-//                        scope.launch {
-//                            drawerState.open()
-//                        }
-//
-//                    }) {
-//                        Text("Click to open")
-//                    }
-//                }
-//            }
-//        )
-//    }
+                Column {
+                    Text("Text in Bodycontext")
+                    Button(onClick = {
+
+//                        scope.launch { drawerState.open() }
+                        scope.launch { scaffoldState.drawerState.open() }
+
+                    }) {
+                        Text("Click to open")
+                    }
+                }
+            }
+        )
+    }
 }
